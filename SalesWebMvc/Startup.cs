@@ -30,20 +30,21 @@ namespace SalesWebMvc
             string connectionString = Configuration.GetConnectionString("SalesWebMvcContext");
 
             services.AddDbContext<SalesWebMvcContext>(options =>
-                options.UseMySql(
-                    connectionString,
-                        ServerVersion.AutoDetect(connectionString),
-                            mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWebMvc") // Configuração do MigrationsAssembly
-    )
-);
+            options.UseMySql(connectionString,
+            ServerVersion.AutoDetect(connectionString),
+            mySqlOptions => mySqlOptions.MigrationsAssembly("SalesWebMvc")));
+
+
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {
