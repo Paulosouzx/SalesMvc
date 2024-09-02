@@ -6,7 +6,6 @@ namespace SalesWebMvc.Services.Exceptions
     {
         public IntegrityException(string message) : base(message)
         {
-
         }
     }
 }
