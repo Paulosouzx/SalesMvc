@@ -33,6 +33,5 @@ namespace SalesWebMvc.Models
             //Vamos enviar parametros de Data para a função que fizemos na classe Seller, que vai passar o initial e o final e vai nos retornar o valor final somado, na qual vamos retornar para outro local
             return Sellers.Sum(seller => seller.TotalSales(initial, final));
         }
-
     }
 }
